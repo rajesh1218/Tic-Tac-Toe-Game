@@ -8,7 +8,7 @@ metadata:
     # nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: tic-tac-toe.example.com  # Replace with your actual domain
+  - host: tic-tac-toe.cloud.com  # Replace with your actual domain
     http:
       paths:
       - path: /
