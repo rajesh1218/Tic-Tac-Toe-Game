@@ -2,25 +2,14 @@ pipeline{
     agent any
     stages{
 
-        stage ("Build App Image") {
-            steps {
-                script {
-                
-                    // Build Docker image
-                    sh "docker build -t ${REGISTRY}/${IMAGE_NAME}:${env.BUILD_NUMBER} ."
-                }
-            }
-        }
-        
-
-        stage ("Push App Image") {
-            steps {
-              
-                withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER')]) {
-                    sh """
-                       echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                       docker push ${REGISTRY}/${IMAGE_NAME}:${env.BUILD_NUMBER}
-                    """
+       stage("Docker Build & Push"){
+            steps{
+                script{
+                   withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
+                       sh "docker build -t tic:latest ."
+                       sh "docker tag netflix ash425/tic:latest "
+                       sh "docker push ash425/tic:latest "
+                    }
                 }
             }
         }
