@@ -7,7 +7,7 @@ pipeline{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
                        sh "docker build -t tic:latest ."
-                       sh "docker tag netflix ash425/tic:latest "
+                       sh "docker tag tic:latest ash425/tic:latest "
                        sh "docker push ash425/tic:latest "
                     }
                 }
