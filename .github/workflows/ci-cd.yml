@@ -128,16 +128,7 @@ jobs:
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          
-      - name: Log in to GHCR
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-     
-      - name: Run Trivy vulnerability scanner
-        run: |
-          sudo snap install trivy
-          sudo chmod 777 /var/run/docker.sock
-          sudo trivy image -f json -o trivy-report.json ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:sha-${{ github.sha }}
+          labels: ${{ steps.meta.outputs.labels }}        
       
       # - name: Run Trivy vulnerability scanner
       #   uses: aquasecurity/trivy-action@0.28.0
