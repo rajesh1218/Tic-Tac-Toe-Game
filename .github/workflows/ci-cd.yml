@@ -133,7 +133,7 @@ jobs:
       - name: Run Trivy vulnerability scanner
         run: |
           sudo snap install trivy
-          sudo trivy image -f json -o trivy-report.json ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          sudo trivy image -f json -o trivy-report.json ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:sha-${{ github.sha }}
       
       # - name: Run Trivy vulnerability scanner
       #   uses: aquasecurity/trivy-action@0.28.0
